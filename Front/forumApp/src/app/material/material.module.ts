@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,8 +19,7 @@ import { LayoutModule } from '@angular/cdk/layout';
   declarations: [],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
-    // FlexLayoutModule,
+    FlexLayoutModule,
     MatListModule,
     MatCardModule,
     MatIconModule,
@@ -37,8 +36,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     LayoutModule
   ],
   exports: [
-    BrowserAnimationsModule,
-    // FlexLayoutModule,
+    FlexLayoutModule,
     MatListModule,
     MatCardModule,
     MatIconModule,

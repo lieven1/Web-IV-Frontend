@@ -61,6 +61,7 @@ export class AuthenticationService {
   }
 
   register(
+    username: string,
     firstname: string,
     lastname: string,
     email: string,
@@ -70,10 +71,11 @@ export class AuthenticationService {
       .post(
         `${environment.apiUrl}/gebruikers/register`,
         {
-          firstname,
-          lastname,
-          email,
-          password,
+          userName: username,
+          firstName: firstname,
+          lastName: lastname,
+          email: email,
+          password: password,
           passwordConfirmation: password,
         },
         { responseType: 'text' }
