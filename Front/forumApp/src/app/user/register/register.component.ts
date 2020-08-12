@@ -125,7 +125,7 @@ export class RegisterComponent implements OnInit {
               this.router.navigateByUrl(this.authService.redirectUrl);
               this.authService.redirectUrl = undefined;
             } else {
-              this.router.navigate(['/gebruikers/register']);
+              this.router.navigate(['']);             //TODO: navigeren naar home page
             }
           } else {
             this.errorMessage = `Could not login`;
