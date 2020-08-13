@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutGap="2%">
+    <app-add-forum (newForum)="addNewForum($event)"></app-add-forum>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+    <div class="forum" fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%"
+    *ngFor="let localForum of fora">
+        <app-forum [forum]="localForum"></app-forum>
+    </div>
+    </div>
+</div>

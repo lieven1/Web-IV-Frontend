@@ -9,19 +9,21 @@ import { httpInterceptorProviders } from './interceptors';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ForumModule } from './forum/forum.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    MainNavComponent
+    MainNavComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     MaterialModule,
     HttpClientModule,
-    UserModule
+    UserModule,
+    AppRoutingModule,
+    ForumModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
