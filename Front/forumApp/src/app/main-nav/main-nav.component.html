@@ -7,7 +7,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>ForumApp</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['forum/list']">fora</a>
       <a mat-list-item [routerLink]="['']">todo</a>
@@ -24,7 +24,6 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>forumapp</span>
       <span class="fill-space"></span>
       <span *ngIf="loggedInUser$ | async as user; else loginTemplate">
         {{ user }}

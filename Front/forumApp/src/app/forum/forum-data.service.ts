@@ -3,33 +3,26 @@ import { Forum } from './forum.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForumDataService{
-  // private _reloadFora$ = new BehaviorSubject<boolean>(true);
-  private _fora$ = new BehaviorSubject<Forum[]>([]);
-  private _fora: Forum[];
+  private _reloadFora$ = new BehaviorSubject<boolean>(true);
   
-  constructor(private http: HttpClient) {
-    this.fora$.subscribe((fora: Forum[]) => {
-      this._fora = fora;
-      this._fora$.next(this._fora);
-    });
+  constructor(private http: HttpClient) { }
+
+  getFora$(name: string) {
+    return this._reloadFora$.pipe(
+      switchMap(() => this.fetchFora$(name)));
   }
 
-  get allFora$(): Observable<Forum[]> {
-    return this._fora$;
-  }
-
-  get fora$(): Observable<Forum[]> {
-    return this.http.get(`${environment.apiUrl}/forum/`).pipe(
-      tap(console.log),
-      catchError(this.handleError),
-      map((list: any[]): Forum[] => list.map(Forum.fromJSON))
-    );
+  fetchFora$(name: string) {
+    return this.http
+      .get(`${environment.apiUrl}/forum/getFora?filter=${name}`)
+      .pipe(catchError(this.handleError), 
+      map((list: any[]): Forum[] => list.map(Forum.fromJSON)));
   }
 
   getForum$(id: string): Observable<Forum> {
@@ -41,15 +34,13 @@ export class ForumDataService{
   addNewForum(forum: Forum) {
     return this.http
     .post(`${environment.apiUrl}/forum/`, forum.toJSON())
-    .pipe(catchError(this.handleError), map(Forum.fromJSON))
-    /* .pipe(catchError((err) => {
-      return throwError(err);
-    }), tap((fo: Forum) => {
+    .pipe(catchError(this.handleError))/* , map(Forum.fromJSON)) */
+    .subscribe(() => {
       this._reloadFora$.next(true);
-    })) */
-    .subscribe((fo: Forum) => {
+    })
+    /* .subscribe((fo: Forum) => {
       this._fora = [...this._fora, fo];
-    });
+    }); */
   }
 
   handleError(err: any): Observable<never> {
