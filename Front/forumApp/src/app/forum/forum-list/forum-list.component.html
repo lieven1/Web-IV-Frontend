@@ -1,9 +1,22 @@
 <div fxLayout="column" fxLayoutGap="2%">
-    <app-add-forum (newForum)="addNewForum($event)"></app-add-forum>
-    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
-    <div class="forum" fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%"
-    *ngFor="let localForum of fora">
-        <app-forum [forum]="localForum"></app-forum>
-    </div>
-    </div>
+  <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+    got an error while loading the forum list: {{ errorMessage }}
+  </mat-card>
+  <div *ngIf="(fora$ | async) as fora; else loadingOrError">
+      <div fxLayout="column" fxLayoutGap="2%">
+          <app-add-forum (newForum)="addNewForum($event)"></app-add-forum>
+          <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+          <div class="forum" fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%"
+          *ngFor="let localForum of fora">
+              <app-forum [forum]="localForum"></app-forum>
+          </div>
+          </div>
+      </div>
+  </div>
+  <ng-template #loadingOrError>
+    <span *ngIf="errorMessage; else loading"></span>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </ng-template>
 </div>

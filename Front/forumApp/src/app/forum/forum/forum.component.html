@@ -6,7 +6,7 @@
         <h3 mat-subheader>posts</h3>
         <mat-list>
             <mat-list-item *ngFor="let post of forum.posts">
-                <app-post [name]="post"></app-post>
+                <app-post [post]="post"></app-post>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
