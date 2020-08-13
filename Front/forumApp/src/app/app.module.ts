@@ -22,8 +22,8 @@ import { ForumModule } from './forum/forum.module';
     MaterialModule,
     HttpClientModule,
     UserModule,
-    AppRoutingModule,
-    ForumModule
+    ForumModule,
+    AppRoutingModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

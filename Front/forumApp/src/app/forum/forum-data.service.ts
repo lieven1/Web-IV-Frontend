@@ -32,6 +32,12 @@ export class ForumDataService{
     );
   }
 
+  getForum$(id: string): Observable<Forum> {
+    return this.http
+      .get(`${environment.apiUrl}/forum/getForum?id=${id}`)
+      .pipe(catchError(this.handleError), map(Forum.fromJSON));
+  }
+
   addNewForum(forum: Forum) {
     return this.http
     .post(`${environment.apiUrl}/forum/`, forum.toJSON())

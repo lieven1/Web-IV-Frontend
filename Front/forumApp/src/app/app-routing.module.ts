@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ForumListComponent } from './forum/forum-list/forum-list.component';
 
 const appRoutes: Routes = [
-  { path: 'forumList', component: ForumListComponent},
+  //{ path: 'forum', loadChildren: () => import('./forum/forum.module').then(mod => mod.ForumModule)},
+  //data: {preload: true}},
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ]
@@ -13,6 +13,7 @@ const appRoutes: Routes = [
   declarations: [],
   imports: [
     RouterModule.forRoot(appRoutes)
+      //{preloadingStrategy: PreloadAllModules})
   ],
   exports: [
     RouterModule
