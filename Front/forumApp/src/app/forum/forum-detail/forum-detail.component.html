@@ -1,12 +1,14 @@
 <mat-card>
     <mat-card-header>    
         <mat-card-title>forum {{ forum.name }}</mat-card-title>
+        <button (click)="follow($event)">Follow</button>    
     </mat-card-header>
     <mat-card-content>
         <h3 mat-subheader>posts</h3>
         <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
-            got an error while loading the forum list: {{ errorMessage }}
-          </mat-card>
+            error: {{ errorMessage }}
+        </mat-card>
+        <app-add-post [forum]="forum" (newPost)="addNewPost($event)"></app-add-post>
         <div *ngIf="(posts$ | async) as posts; else loadingOrError">
             <div fxLayout="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
                 <div id="forloop" *ngFor="let post of posts">

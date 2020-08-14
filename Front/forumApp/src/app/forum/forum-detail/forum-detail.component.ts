@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Forum } from '../forum.model';
 import { ActivatedRoute } from '@angular/router';
 import { ForumDataService } from '../forum-data.service';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { Post } from '../post.model';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forum-detail',
@@ -19,12 +20,26 @@ export class ForumDetailComponent implements OnInit {
   {
     this.route.data.subscribe(item => 
       this.forum = item['forum']);
-
     this._fetchPosts$ = this._forumDataService.getPosts$(this.forum.id);
   }
 
   get posts$(): Observable<Post[]> {
     return this._fetchPosts$;
+  }
+
+  follow(event:any):void {
+    let get = this._forumDataService.follow(this.forum.id)
+    .pipe(
+      catchError((err) => {
+        this.errorMessage = err;
+        return EMPTY;
+      })
+    );
+    get.subscribe();
+  }
+
+  addNewPost(post: Post) {
+    this._forumDataService.addPost(post);
   }
 
   ngOnInit() {

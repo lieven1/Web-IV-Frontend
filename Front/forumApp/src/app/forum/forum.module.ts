@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ForumDetailComponent } from './forum-detail/forum-detail.component';
 import { ForumResolver } from './ForumResolver';
+import { AddPostComponent } from './add-post/add-post.component';
 
 const routes: Routes = [
   { path: 'forum/list', component: ForumListComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
 ]; 
 
 @NgModule({
-  declarations: [PostComponent, ForumListComponent, AddForumComponent, ForumDetailComponent],
+  declarations: [PostComponent, ForumListComponent, AddForumComponent, ForumDetailComponent, AddPostComponent],
   imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)],
   exports: [ForumListComponent, AddForumComponent]
 })

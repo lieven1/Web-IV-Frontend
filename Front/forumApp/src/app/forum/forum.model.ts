@@ -7,9 +7,9 @@ interface ForumJson {
 }
 
 export class Forum {
-  private _id: number;
   constructor(
-    private _name: string,
+    private _name?: string,
+    private _id?: number
     //private _posts = new Array<Post>()
   ) {}
 
@@ -25,6 +25,13 @@ export class Forum {
           //posts: this.posts.map(p => p.toJSON())
       };
   }
+
+  toJSONId(): ForumJson {
+    return <ForumJson> {
+        id: this.id,
+        //posts: this.posts.map(p => p.toJSON())
+    };
+}
 
   get id(): number {
     return this._id;

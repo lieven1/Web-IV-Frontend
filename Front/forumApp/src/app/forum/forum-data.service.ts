@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Forum } from './forum.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { Post } from './post.model';
 })
 export class ForumDataService{
   private _reloadFora$ = new BehaviorSubject<boolean>(true);
+  private _reloadPosts$ = new BehaviorSubject<boolean>(true);
   
   constructor(private http: HttpClient) { }
 
@@ -55,10 +56,30 @@ export class ForumDataService{
     return throwError(errorMessage);
   }
 
-  getPosts$(id: number): Observable<Post[]> {
+  getPosts$(id: number) {
+    return this._reloadPosts$.pipe(
+      switchMap(() => this.fetchPosts$(id)));
+  }
+
+  fetchPosts$(id: number): Observable<Post[]> {
     return this.http
       .get(`${environment.apiUrl}/forum/getPosts?forumId=${id}`)
       .pipe(catchError(this.handleError), 
       map((list: any[]): Post[] => list.map(Post.fromJSON)));
+  }
+
+  follow(id: number) {
+    return this.http
+      .get(`${environment.apiUrl}/forum/follow?forumId=${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  addPost(post: Post) {
+    return this.http
+    .post(`${environment.apiUrl}/forum/addPost/`, post.toJSON())
+    .pipe(catchError(this.handleError))/* , map(Forum.fromJSON)) */
+    .subscribe(() => {
+      this._reloadFora$.next(true);
+    })
   }
 }
