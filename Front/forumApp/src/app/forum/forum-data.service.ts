@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
+import { Post } from './post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,12 @@ export class ForumDataService{
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  getPosts$(id: number): Observable<Post[]> {
+    return this.http
+      .get(`${environment.apiUrl}/forum/getPosts?forumId=${id}`)
+      .pipe(catchError(this.handleError), 
+      map((list: any[]): Post[] => list.map(Post.fromJSON)));
   }
 }

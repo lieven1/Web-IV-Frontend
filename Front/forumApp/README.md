@@ -1,3 +1,11 @@
+# TODO
+- Follow forum
+- Make/delete/edit post
+- Admin forum (delete/edit)
+- Admin posts
+- Admin followers (block/ban users, add admins, edit permissions)
+- Spamfilter
+
 # ForumApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.

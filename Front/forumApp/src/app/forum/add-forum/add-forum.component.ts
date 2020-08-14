@@ -14,7 +14,7 @@ export class AddForumComponent implements OnInit {
   }
 
   addForum(forumName: HTMLInputElement): boolean {
-    const forum = new Forum(forumName.value, []);
+    const forum = new Forum(forumName.value/*, []*/);
     this.newForum.emit(forum);
     return false;
   }
