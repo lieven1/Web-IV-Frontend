@@ -10,11 +10,12 @@ import { ForumResolver } from './ForumResolver';
 import { AddPostComponent } from './add-post/add-post.component';
 import { FollowListComponent } from './follow-list/follow-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from '../user/auth.guard';
 
 const routes: Routes = [
   { path: 'forum/list', component: ForumListComponent },
   { path: 'follow/list', component: FollowListComponent },
-  { path: 'forum/add', component: AddForumComponent },
+  { path: 'forum/add', canActivate:[AuthGuard], component: AddForumComponent },
   { path: 'forum/detail/:id', component: ForumDetailComponent
     ,resolve: { forum: ForumResolver }
   }

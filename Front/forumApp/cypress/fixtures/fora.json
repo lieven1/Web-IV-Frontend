@@ -1,0 +1,60 @@
+[
+  {
+    "id": 3,
+    "naam": "Astrografie",
+    "foraLidschappen": [
+      {
+        "forumId": 3,
+        "gebruikerId": 1,
+        "gebruiker": null
+      },
+      {
+        "forumId": 3,
+        "gebruikerId": 2,
+        "gebruiker": null
+      }
+    ],
+    "posts": null
+  },
+  {
+    "id": 2,
+    "naam": "Fotografie",
+    "foraLidschappen": [
+      {
+        "forumId": 2,
+        "gebruikerId": 1,
+        "gebruiker": null
+      }
+    ],
+    "posts": null
+  },
+  {
+    "id": 4,
+    "naam": "Muziek",
+    "foraLidschappen": [
+      {
+        "forumId": 4,
+        "gebruikerId": 1,
+        "gebruiker": null
+      },
+      {
+        "forumId": 4,
+        "gebruikerId": 3,
+        "gebruiker": null
+      }
+    ],
+    "posts": null
+  },
+  {
+    "id": 1,
+    "naam": "Paleontologie",
+    "foraLidschappen": [
+      {
+        "forumId": 1,
+        "gebruikerId": 2,
+        "gebruiker": null
+      }
+    ],
+    "posts": null
+  }
+]

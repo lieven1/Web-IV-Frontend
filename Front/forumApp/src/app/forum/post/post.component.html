@@ -7,10 +7,20 @@
             by {{ post.user.username }}
         </div>
     </mat-card-header>
+    <mat-card-content>
+        {{ post.content }}
+    </mat-card-content>
     <div fxLayout="row">
-        <mat-card-content>
-            {{ post.content }}
-        </mat-card-content>
+        <div fxLayout="column" fxFlex="80">
+            <a (click)="toggle()">
+                Reply
+            </a>
+            <app-add-post *ngIf="show" [forum]="post.forum" [repliesTo]="post" (newPost)="addNewPost($event)"></app-add-post>
+        </div>
+        <div>
+            {{timeAgo}} ago
+        </div>
     </div>
+    
 </mat-card>
 <button class="delete" mat-raised-button *ngIf="showDelete()" (click)="delete()">delete</button>

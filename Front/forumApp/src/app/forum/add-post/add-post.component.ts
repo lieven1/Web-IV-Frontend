@@ -10,6 +10,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 export class AddPostComponent implements OnInit {
   @Input() public forum: Forum;
+  @Input() public repliesTo?: Post;
   @Output() public newPost = new EventEmitter<Post>();
   public post: FormGroup;
 
@@ -17,12 +18,12 @@ export class AddPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.post = this.fb.group({
-      content: ['risotto']
+      content: ['content']
     });
   }
 
   onSubmit() {
-    this.newPost.emit(new Post(this.post.value.content, this.forum.id));
+    this.newPost.emit(new Post(this.post.value.content, this.forum.id, null, null, this.repliesTo));
   }
 
 }

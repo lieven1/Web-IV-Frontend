@@ -8,6 +8,7 @@ interface PostJson {
     email: string
   };
   repliesTo?: PostJson;
+  dateAdded?: Date;
   forum: {
     id: number;
   }
@@ -47,6 +48,7 @@ export class Post {
   private _id : number;
   private _user : User;
   private _forum : Forum;
+  private _date?: Date;
   constructor(
     private _content: string,
     forumid: number,
@@ -62,6 +64,7 @@ export class Post {
       const post = new Post(json.inhoud, json.forum.id, json.poster.userName, json.poster.email,
         json.repliesTo ? Post.fromJSON(json.repliesTo) : null);
       post._id = json.id;
+      post._date = json.dateAdded;
       return post;
   }
 
@@ -69,7 +72,9 @@ export class Post {
     return <PostJson> {
         inhoud: this._content,
         //poster: this._user.toJSON(),
-        forum: this._forum.toJSONId()
+        forum: this._forum.toJSONId(),
+        id: this._id != 0 && this._id != undefined ? this._id : undefined,
+        repliesTo: this._repliesTo ? this._repliesTo.toJSON() : null
     };
   }
 
@@ -84,5 +89,11 @@ export class Post {
   }
   get repliesTo(): Post {
     return this._repliesTo;
+  }
+  get dateAdded(): Date {
+    return this._date;
+  }
+  get forum() : Forum {
+    return this._forum;
   }
 }
