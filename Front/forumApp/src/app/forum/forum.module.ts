@@ -8,9 +8,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForumDetailComponent } from './forum-detail/forum-detail.component';
 import { ForumResolver } from './ForumResolver';
 import { AddPostComponent } from './add-post/add-post.component';
+import { FollowListComponent } from './follow-list/follow-list.component';
 
 const routes: Routes = [
   { path: 'forum/list', component: ForumListComponent },
+  { path: 'follow/list', component: FollowListComponent },
   { path: 'forum/add', component: AddForumComponent },
   { path: 'forum/detail/:id', component: ForumDetailComponent
     ,resolve: { forum: ForumResolver }
@@ -18,8 +20,8 @@ const routes: Routes = [
 ]; 
 
 @NgModule({
-  declarations: [PostComponent, ForumListComponent, AddForumComponent, ForumDetailComponent, AddPostComponent],
+  declarations: [PostComponent, ForumListComponent, AddForumComponent, ForumDetailComponent, AddPostComponent, FollowListComponent],
   imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)],
-  exports: [ForumListComponent, AddForumComponent]
+  exports: [ForumListComponent, FollowListComponent, AddForumComponent]
 })
 export class ForumModule { }

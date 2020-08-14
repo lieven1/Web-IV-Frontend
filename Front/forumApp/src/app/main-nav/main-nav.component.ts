@@ -24,7 +24,7 @@ export class MainNavComponent {
     private breakpointObserver: BreakpointObserver,
     private _authenticationService: AuthenticationService,
     private _router: Router
-  ) {}
+  ) { }
 
   logout() {
     this._authenticationService.logout();

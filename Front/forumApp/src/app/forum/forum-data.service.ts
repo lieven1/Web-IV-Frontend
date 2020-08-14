@@ -15,14 +15,17 @@ export class ForumDataService{
   
   constructor(private http: HttpClient) { }
 
-  getFora$(name: string) {
+  getFora$(name?: string, followed?: string) {
     return this._reloadFora$.pipe(
-      switchMap(() => this.fetchFora$(name)));
+      switchMap(() => this.fetchFora$(name, followed)));
   }
 
-  fetchFora$(name: string) {
+  fetchFora$(name?: string, followed?: string) {
+    let params = new HttpParams();
+    params = name ? params.append('filter', name) : params;
+    params = followed ? params.append('followed', '1') : params;
     return this.http
-      .get(`${environment.apiUrl}/forum/getFora?filter=${name}`)
+      .get(`${environment.apiUrl}/forum/getFora/`, { params })
       .pipe(catchError(this.handleError), 
       map((list: any[]): Forum[] => list.map(Forum.fromJSON)));
   }

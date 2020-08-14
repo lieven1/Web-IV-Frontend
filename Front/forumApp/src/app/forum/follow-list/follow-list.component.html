@@ -1,0 +1,26 @@
+<div fxLayout="row" fxLayoutGap="2%">
+    <app-add-forum (newForum)="addNewForum($event)"></app-add-forum>
+    <mat-card>
+      <mat-form-field>
+        <input matInput (keyup)="filterForum$.next($event.target.value)" placeholder="filter"
+          type="text" data-cy="filterInput" [value]="filterForumName"/>
+      </mat-form-field>
+    </mat-card>
+  </div>
+  <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+    got an error while loading the forum list: {{ errorMessage }}
+  </mat-card>
+  <div *ngIf="(fora$ | async) as fora; else loadingOrError">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+      <button mat-raised-button [routerLink]="['/forum/detail', localForum.id]" 
+      fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%" *ngFor="let localForum of fora">
+        <h3>forum {{ localForum.name }}</h3>
+      </button>
+    </div>
+  </div>
+  <ng-template #loadingOrError>
+    <span *ngIf="errorMessage; else loading"></span>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </ng-template>
