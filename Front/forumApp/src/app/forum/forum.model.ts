@@ -1,5 +1,3 @@
-import { Post, PostJson } from './post.model';
-
 interface ForumJson {
   id: number;
   naam: string;
@@ -9,11 +7,11 @@ interface ForumJson {
   //posts: PostJson[];
 }
 
-export interface ForumLidJson {
+interface ForumLidJson {
   gebruikerId: number;
 }
 
-export class ForumLid {
+class ForumLid {
   constructor(
     private _gebruikerId: number
   ) {}

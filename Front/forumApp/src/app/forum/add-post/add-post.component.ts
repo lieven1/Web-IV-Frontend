@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Post } from '../post.model';
 import { Forum } from '../forum.model';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-add-post',
@@ -10,15 +11,18 @@ import { Forum } from '../forum.model';
 export class AddPostComponent implements OnInit {
   @Input() public forum: Forum;
   @Output() public newPost = new EventEmitter<Post>();
-  constructor() { }
+  public post: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.post = this.fb.group({
+      content: ['risotto']
+    });
   }
 
-  addPost(content: HTMLInputElement): boolean {
-    const post = new Post(content.value, this.forum.id);
-    this.newPost.emit(post);
-    return false;
+  onSubmit() {
+    this.newPost.emit(new Post(this.post.value.content, this.forum.id));
   }
 
 }

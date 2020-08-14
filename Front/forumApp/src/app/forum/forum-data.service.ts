@@ -80,9 +80,18 @@ export class ForumDataService{
   addPost(post: Post) {
     return this.http
     .post(`${environment.apiUrl}/forum/addPost/`, post.toJSON())
-    .pipe(catchError(this.handleError))/* , map(Forum.fromJSON)) */
+    .pipe(catchError(this.handleError))
     .subscribe(() => {
-      this._reloadFora$.next(true);
+      this._reloadPosts$.next(true);
+    })
+  }
+
+  removePost(post: Post) {
+    return this.http
+    .delete(`${environment.apiUrl}/forum/removePost?postId=${post.id}`)
+    .pipe(catchError(this.handleError))
+    .subscribe(() => {
+      this._reloadPosts$.next(true);
     })
   }
 }

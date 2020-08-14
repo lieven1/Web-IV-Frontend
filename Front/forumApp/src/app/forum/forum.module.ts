@@ -9,6 +9,7 @@ import { ForumDetailComponent } from './forum-detail/forum-detail.component';
 import { ForumResolver } from './ForumResolver';
 import { AddPostComponent } from './add-post/add-post.component';
 import { FollowListComponent } from './follow-list/follow-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'forum/list', component: ForumListComponent },
@@ -21,7 +22,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [PostComponent, ForumListComponent, AddForumComponent, ForumDetailComponent, AddPostComponent, FollowListComponent],
-  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule.forChild(routes)],
   exports: [ForumListComponent, FollowListComponent, AddForumComponent]
 })
 export class ForumModule { }

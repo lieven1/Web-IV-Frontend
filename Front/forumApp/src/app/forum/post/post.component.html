@@ -1,13 +1,16 @@
-<mat-card>
+<mat-card fxFlex="40">
     <mat-card-header>
         <div *ngIf="post.repliesTo">
-            by {{ post.username }} to {{post.repliesTo.username}}
+            by {{ post.user.username }} to {{post.repliesTo.user.username}}
         </div>
         <div *ngIf="!post.repliesTo">
-            by {{ post.username }}
+            by {{ post.user.username }}
         </div>
     </mat-card-header>
-    <mat-card-content>
-        {{ post.content }}
-    </mat-card-content>
+    <div fxLayout="row">
+        <mat-card-content>
+            {{ post.content }}
+        </mat-card-content>
+    </div>
 </mat-card>
+<button class="delete" mat-raised-button *ngIf="showDelete()" (click)="delete()">delete</button>
