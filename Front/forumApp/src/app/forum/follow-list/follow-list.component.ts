@@ -7,8 +7,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-follow-list',
-  templateUrl: './follow-list.component.html',
-  styleUrls: ['./follow-list.component.css']
+/*   templateUrl: './follow-list.component.html',
+  styleUrls: ['./follow-list.component.css'] */
+  templateUrl: '../forum-list/forum-list.component.html',
+  styleUrls: ['../forum-list/forum-list.component.css']
 })
 export class FollowListComponent implements OnInit{
   public errorMessage: string = '';

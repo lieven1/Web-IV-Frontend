@@ -1,0 +1,22 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* <-- allows multi-line flex container */
+    width: full;
+    height: full;
+    background-color:#F8F8F8;
+}
+.flex-item {
+    flex: 0 0 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin: 5px;
+    background-color: white;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

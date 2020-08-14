@@ -3,18 +3,47 @@ import { Post, PostJson } from './post.model';
 interface ForumJson {
   id: number;
   naam: string;
+  foraLidschappen: {
+    gebruikerId: number;
+  }[]
   //posts: PostJson[];
+}
+
+export interface ForumLidJson {
+  gebruikerId: number;
+}
+
+export class ForumLid {
+  constructor(
+    private _gebruikerId: number
+  ) {}
+
+  static fromJSON(json: ForumLidJson): ForumLid {
+    const fl = new ForumLid(json.gebruikerId);
+    return fl;
+  }
+
+  toJSON(): ForumLidJson {
+    return <ForumLidJson> {
+      gebruikerId: this._gebruikerId,
+    };
+  }
+
+  get gebruikerId(): string {
+    return this.gebruikerId;
+  }
 }
 
 export class Forum {
   constructor(
     private _name?: string,
+    private _aantalLeden?: number,
     private _id?: number
     //private _posts = new Array<Post>()
   ) {}
 
   static fromJSON(json:ForumJson): Forum {
-      const forum = new Forum(json.naam/*, json.posts.map(Post.fromJSON)*/);
+      const forum = new Forum(json.naam, json.foraLidschappen.length /*json.posts.map(Post.fromJSON)*/);
       forum._id = json.id;
       return forum;
   }
@@ -38,6 +67,9 @@ export class Forum {
   }
   get name(): string {
     return this._name;
+  }
+  get aantal(): number {
+    return this._aantalLeden;
   }
   /* get posts():Post[] {
       return this._posts;

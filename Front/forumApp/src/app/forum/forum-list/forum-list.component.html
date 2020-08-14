@@ -11,11 +11,16 @@
   got an error while loading the forum list: {{ errorMessage }}
 </mat-card>
 <div *ngIf="(fora$ | async) as fora; else loadingOrError">
-  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
-    <button mat-raised-button [routerLink]="['/forum/detail', localForum.id]" 
-    fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%" *ngFor="let localForum of fora">
-      <h3>forum {{ localForum.name }}</h3>
-    </button>
+  <div class="flex-container">
+    <div class="flex-item" fxFlex="0 0 calc(24%-0.5%)" fxFlex.xs="100%" 
+    fxLayoutGap="0.5%" fxLayoutAlign="start" *ngFor="let localForum of fora">
+      <div fxFlex="grow" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center center">
+        <div mat-card-subtitle fxFlexOffset="5">{{ localForum.aantal }} followers</div>
+        <button fxFlex="grow" fxFlexOffset="5" mat-raised-button [routerLink]="['/forum/detail', localForum.id]">
+          <h3>forum {{ localForum.name }}</h3>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 <ng-template #loadingOrError>
